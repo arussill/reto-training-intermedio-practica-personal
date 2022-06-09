@@ -9,7 +9,6 @@ import { PreguntasComponent } from './persona/preguntas/preguntas.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule} from '@angular/fire/compat'
-import { environment } from 'src/environments/environment';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegistroComponent } from './persona/registro/registro.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -21,6 +20,11 @@ import { ToastModule } from 'primeng/toast';
 import { ToastrModule } from 'ngx-toastr';
 import { RequestionComponent } from './paginas/requestion/requestion.component';
 import { EditComponent } from './paginas/edit/edit.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideDatabase,getDatabase } from '@angular/fire/database';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 
 
@@ -30,12 +34,12 @@ import { EditComponent } from './paginas/edit/edit.component';
     LoginComponent,
     PreguntasComponent,
     NavbarComponent,
-    RegistroComponent, 
+    RegistroComponent,
     AnswerComponent,
     QuestionComponent,
     RequestionComponent,
     EditComponent
-       
+
   ],
   imports: [
     BrowserModule,
@@ -43,14 +47,18 @@ import { EditComponent } from './paginas/edit/edit.component';
     PrimeNGModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebase),
     HttpClientModule,
     NgbModule,
     FormsModule,
-    ToastrModule.forRoot()
-    
-   
-    
+    ToastrModule.forRoot(),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideDatabase(() => getDatabase()),
+    provideFirestore(() => getFirestore())
+
+
+
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent]
