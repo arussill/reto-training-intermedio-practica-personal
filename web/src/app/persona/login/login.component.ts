@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
             summary: 'Bienvenido',
             detail: 'Disfruta de tu estadía',
           });
-          this.route.navigate(['preguntas']);
+          this.route.navigate(['questions']);
         }
 
         this.mostrar = !this.mostrar;
@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
             detail: 'Disfruta de tu estadía',
           });
           setTimeout(() => {
-            this.route.navigate(['preguntas']);
+            this.route.navigate(['questions']);
           }, 3000);
 
         } else {
@@ -89,8 +89,8 @@ export class LoginComponent implements OnInit {
     });
   }
  
-  preguntasHome() {
-    this.route.navigate(['preguntas']);
+  questionsHome() {
+    this.route.navigate(['questions']);
   }
 
   //TODO: Utilidades

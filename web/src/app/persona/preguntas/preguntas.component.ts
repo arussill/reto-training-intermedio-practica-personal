@@ -4,11 +4,11 @@ import { QuestionService } from 'src/app/Service/question.service';
 import { ServiceService } from 'src/app/Service/service.service';
 
 @Component({
-  selector: 'app-preguntas',
+  selector: 'app-questions',
   templateUrl: './preguntas.component.html',
   styleUrls: ['./preguntas.component.css'],
 })
-export class PreguntasComponent implements OnInit {
+export class QuestionsComponent implements OnInit {
   userLogged = this.authService.getUserLogged();
   uid: any;
 
