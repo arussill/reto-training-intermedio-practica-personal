@@ -5,12 +5,12 @@ import { MessageService, Message } from 'primeng/api';
 import { ServiceService } from 'src/app/Service/service.service';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-registro',
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.scss'],
   providers: [MessageService],
 })
-export class RegisterComponent implements OnInit {
+export class RegistroComponent implements OnInit {
   mostrar: Boolean = false;
   val1: number = 3;
 
@@ -21,28 +21,35 @@ export class RegisterComponent implements OnInit {
   });
 
   constructor(
-    private formBuilder: FormBuilder,
-    private messageService: MessageService,
-    private authService: ServiceService,
-    private route: Router
+    public formBuilder: FormBuilder,
+    public messageService: MessageService,
+    public authService: ServiceService,
+    public route: Router
   ) {}
 
   ngOnInit(): void {}
 
   ingresar() {
-    this.mostrar = !this.mostrar;    
+    this.mostrar = !this.mostrar;
+
     this.authService
       .loginRegistre(this.form.value.email, this.form.value.password)
-      .then((res) => {       
+        .then((res) => {
+          // console.log("aqui toy:" + res?.user?.emailVerified);
         if (res) {
           this.messageService.add({
             severity: 'success',
             summary: '!Exitoso¡',
             detail: 'Usuario Almacenado correctamente',
           });
-          setTimeout(() => {
-            this.route.navigate(['questions']);
-          }, 2000);
+
+          // setTimeout(() => {
+          //   if(res?.user?.emailVerified){
+          //   this.route.navigate(['preguntas']);
+          // }else{
+          //   this.route.navigate(['login']);
+          // }}, 2000);
+
         } else {
           this.messageService.add({
             severity: 'error',
@@ -55,7 +62,7 @@ export class RegisterComponent implements OnInit {
       });
   }
   ingresarGoogle() {
-    this.mostrar = !this.mostrar;    
+    this.mostrar = !this.mostrar;
     this.authService
       .loginGoogle(this.form.value.email, this.form.value.password)
       .then((res) => {
@@ -64,11 +71,12 @@ export class RegisterComponent implements OnInit {
   }
   getUserLogged() {
     this.authService.getUserLogged().subscribe((res) => {
+      return res;
     });
   }
-  
-  questionsHome() {
-    this.route.navigate(['questions']);
+
+  preguntasHome() {
+    this.route.navigate(['preguntas']);
   }
 
   //TODO: Utilidades
