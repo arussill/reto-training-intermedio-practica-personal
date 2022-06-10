@@ -5,6 +5,7 @@ import { QuestionComponent } from './paginas/question/question.component';
 import { RequestionComponent } from './paginas/requestion/requestion.component';
 import { LoginComponent } from './persona/login/login.component';
 import { PreguntasComponent } from './persona/preguntas/preguntas.component';
+import { RecoverPasswordComponent } from './persona/recover-password/recover-password.component';
 import { RegistroComponent } from './persona/registro/registro.component';
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'registro', component: RegistroComponent},
   { path: 'answer', component: AnswerComponent},
   {path: 'question/:id', component: RequestionComponent},
+  {path: 'recuperar-contraseña', component: RecoverPasswordComponent},
   {path: '**', pathMatch: 'full', redirectTo:'preguntas'}
 ];
 

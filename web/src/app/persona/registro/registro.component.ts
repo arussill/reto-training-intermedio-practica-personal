@@ -30,19 +30,26 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {}
 
   ingresar() {
-    this.mostrar = !this.mostrar;    
+    this.mostrar = !this.mostrar;
+
     this.authService
       .loginRegistre(this.form.value.email, this.form.value.password)
-      .then((res) => {       
+        .then((res) => {
+          console.log("aqui toy:" + res?.user?.emailVerified);
         if (res) {
           this.messageService.add({
             severity: 'success',
             summary: '!Exitoso¡',
             detail: 'Usuario Almacenado correctamente',
           });
+
           setTimeout(() => {
+            if(res?.user?.emailVerified){
             this.route.navigate(['preguntas']);
-          }, 2000);
+          }else{
+            this.route.navigate(['login']);
+          }}, 2000);
+
         } else {
           this.messageService.add({
             severity: 'error',
@@ -55,7 +62,7 @@ export class RegistroComponent implements OnInit {
       });
   }
   ingresarGoogle() {
-    this.mostrar = !this.mostrar;    
+    this.mostrar = !this.mostrar;
     this.authService
       .loginGoogle(this.form.value.email, this.form.value.password)
       .then((res) => {
@@ -64,9 +71,10 @@ export class RegistroComponent implements OnInit {
   }
   getUserLogged() {
     this.authService.getUserLogged().subscribe((res) => {
+      return res;
     });
   }
-  
+
   preguntasHome() {
     this.route.navigate(['preguntas']);
   }

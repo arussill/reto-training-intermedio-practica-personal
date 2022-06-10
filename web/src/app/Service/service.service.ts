@@ -33,20 +33,25 @@ export class ServiceService {
 
   async login(email: string, password: string) {
     try {
-      return await this.afauth.signInWithEmailAndPassword(email, password);
+      return await (await this.afauth.signInWithEmailAndPassword(email, password));
     } catch (error) {
       return null;
     }
   }
   async loginRegistre(email: string, password: string) {
     try {
-      return await this.afauth
-        .createUserWithEmailAndPassword(email, password)
-        .then((result) => {
-          this.afauth.currentUser.then((user) => {
-            user?.sendEmailVerification();
-          });
-        });
+      const registro = await this.afauth
+      .createUserWithEmailAndPassword(email, password);
+
+      this.afauth.currentUser.then((user) => {
+          user?.sendEmailVerification();});
+
+      return registro
+        // .then((result) => {
+        //   this.afauth.currentUser.then((user) => {
+        //     user?.sendEmailVerification();
+        //   }).catch((error) => {return null;});
+        // });
     } catch (error) {
       return null;
     }
@@ -70,6 +75,7 @@ export class ServiceService {
   }
 
   getUserLogged() {
+    console.log(this.afauth.authState);
     return this.afauth.authState;
   }
 
