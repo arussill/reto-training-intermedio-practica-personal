@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "reto-preguntas-y-respuestas": {
+      "hosting": {
+        "reto_sofka": [
+          "reto-preguntas-y-respuestas"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "reto-preguntas-y-respuestas"
+  }
+}

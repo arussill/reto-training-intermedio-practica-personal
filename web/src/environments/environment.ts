@@ -3,17 +3,20 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  firebase: {
+    projectId: 'reto-preguntas-y-respuestas',
+    appId: '1:59017948247:web:09c866913b88dbc7298712',
+    databaseURL: 'https://reto-preguntas-y-respuestas-default-rtdb.firebaseio.com',
+    storageBucket: 'reto-preguntas-y-respuestas.appspot.com',
+    locationId: 'us-central',
+    apiKey: 'AIzaSyC5Vs14KM7gDuT8ILIioEMr8NnCkP3LAZc',
+    authDomain: 'reto-preguntas-y-respuestas.firebaseapp.com',
+    messagingSenderId: '59017948247',
+  },
   production: true,
-  firebaseConfig : {
-    apiKey: "AIzaSyA4vxKfZCl1mLLZUvwPEat19Mq694GIW4U",
-    authDomain: "sofkau-reto.firebaseapp.com",
-    projectId: "sofkau-reto",
-    storageBucket: "sofkau-reto.appspot.com",
-    messagingSenderId: "102782956929",
-    measurementId: "G-MX6F56NV8R"
-  }
 
-  
+
+
 };
 
 /*
