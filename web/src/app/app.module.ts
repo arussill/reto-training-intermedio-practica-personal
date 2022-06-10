@@ -5,12 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PrimeNGModule } from './prime-ng/prime-ng.module';
 import { LoginComponent } from './persona/login/login.component';
-import { PreguntasComponent } from './persona/preguntas/preguntas.component';
+import { QuestionsComponent } from './persona/preguntas/preguntas.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule} from '@angular/fire/compat'
 import { NavbarComponent } from './navbar/navbar.component';
-import { RegistroComponent } from './persona/registro/registro.component';
+import { RegisterComponent } from './persona/registro/registro.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
@@ -34,9 +34,9 @@ import { MessageService } from 'primeng/api';
   declarations: [
     AppComponent,
     LoginComponent,
-    PreguntasComponent,
+    QuestionsComponent,
     NavbarComponent,
-    RegistroComponent,
+    RegisterComponent,
     AnswerComponent,
     QuestionComponent,
     RequestionComponent,

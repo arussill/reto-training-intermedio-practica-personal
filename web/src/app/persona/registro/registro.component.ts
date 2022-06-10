@@ -10,7 +10,7 @@ import { ServiceService } from 'src/app/Service/service.service';
   styleUrls: ['./registro.component.scss'],
   providers: [MessageService],
 })
-export class RegistroComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   mostrar: Boolean = false;
   val1: number = 3;
 
@@ -75,7 +75,7 @@ export class RegistroComponent implements OnInit {
     });
   }
 
-  preguntasHome() {
+  questionsHome() {
     this.route.navigate(['preguntas']);
   }
 
