@@ -26,6 +26,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { RecoverPasswordComponent } from './persona/recover-password/recover-password.component';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -61,7 +62,7 @@ import { RecoverPasswordComponent } from './persona/recover-password/recover-pas
 
 
   ],
-  providers: [HttpClientModule],
+  providers: [HttpClientModule,  MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

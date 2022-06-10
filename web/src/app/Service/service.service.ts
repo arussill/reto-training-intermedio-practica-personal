@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { MessageService } from 'primeng/api';
+
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   AngularFirestore,
@@ -14,10 +16,13 @@ import { User } from '../models/user';
 })
 export class ServiceService {
   userData: any;
+  mostrar: Boolean = false;
   constructor(
     public afauth: AngularFireAuth,
     public store: AngularFirestore,
-    public router: Router
+    public router: Router,
+    public messageService: MessageService,
+
   ) {
     this.afauth.authState.subscribe((user) => {
       if (user) {
@@ -38,6 +43,7 @@ export class ServiceService {
       return null;
     }
   }
+
   async loginRegistre(email: string, password: string) {
     try {
       const registro = await this.afauth
@@ -47,23 +53,24 @@ export class ServiceService {
           user?.sendEmailVerification();});
 
       return registro
-        // .then((result) => {
-        //   this.afauth.currentUser.then((user) => {
-        //     user?.sendEmailVerification();
-        //   }).catch((error) => {return null;});
-        // });
     } catch (error) {
       return null;
     }
   }
 
-  async resetPassword(email: string) {
-    try {
-      return this.afauth.sendPasswordResetEmail(email);
-    } catch (error) {
-      return null;
-    }
+
+  resetPassword(email: string) {
+    return this.afauth
+    .sendPasswordResetEmail(email)
+    .then(() => {
+      window.confirm('Se ha enviado un correo para restablecer la contraseña');
+    })
+    .catch(() => {
+      window.alert('Error al enviar el correo, intente de nuevo');
+    });
   }
+
+
   async loginGoogle(email: string, password: string) {
     try {
       return await this.afauth.signInWithPopup(
@@ -75,8 +82,11 @@ export class ServiceService {
   }
 
   getUserLogged() {
-    console.log(this.afauth.authState);
     return this.afauth.authState;
+  }
+
+  logout() {
+    return this.afauth.signOut();
   }
 
   SetUserData(user: any) {

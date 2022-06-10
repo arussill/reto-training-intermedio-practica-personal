@@ -21,10 +21,10 @@ export class RegistroComponent implements OnInit {
   });
 
   constructor(
-    private formBuilder: FormBuilder,
-    private messageService: MessageService,
-    private authService: ServiceService,
-    private route: Router
+    public formBuilder: FormBuilder,
+    public messageService: MessageService,
+    public authService: ServiceService,
+    public route: Router
   ) {}
 
   ngOnInit(): void {}
@@ -35,7 +35,7 @@ export class RegistroComponent implements OnInit {
     this.authService
       .loginRegistre(this.form.value.email, this.form.value.password)
         .then((res) => {
-          console.log("aqui toy:" + res?.user?.emailVerified);
+          // console.log("aqui toy:" + res?.user?.emailVerified);
         if (res) {
           this.messageService.add({
             severity: 'success',
@@ -43,12 +43,12 @@ export class RegistroComponent implements OnInit {
             detail: 'Usuario Almacenado correctamente',
           });
 
-          setTimeout(() => {
-            if(res?.user?.emailVerified){
-            this.route.navigate(['preguntas']);
-          }else{
-            this.route.navigate(['login']);
-          }}, 2000);
+          // setTimeout(() => {
+          //   if(res?.user?.emailVerified){
+          //   this.route.navigate(['preguntas']);
+          // }else{
+          //   this.route.navigate(['login']);
+          // }}, 2000);
 
         } else {
           this.messageService.add({

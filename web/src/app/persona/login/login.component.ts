@@ -47,22 +47,16 @@ export class LoginComponent implements OnInit {
             detail: 'Clave o Usuario incorrecto, Intente de Nuevo',
           });
         } else {
-          this.verificarEmail(res.user?.emailVerified||false);
-        }
-        this.mostrar = !this.mostrar;
-      });
-  }
-  verificarEmail(email:boolean) {
-    if (email){
 
-    }else{this.messageService.add({
-      severity: 'success',
-      summary: 'Bienvenido',
-      detail: 'Disfruta de tu estadía',
-    });
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Bienvenido',
+            detail: 'Disfruta de tu estadía',
+          });
 
-    this.route.navigate(['preguntas']);}
-  }
+          this.route.navigate(['preguntas']);}
+      this.mostrar = !this.mostrar;  });
+    }
   ingresarGoogle() {
     this.mostrar = !this.mostrar;
     this.authService
@@ -77,21 +71,22 @@ export class LoginComponent implements OnInit {
           setTimeout(() => {
             this.route.navigate(['preguntas']);
           }, 3000);
-
         } else {
           this.messageService.add({
             severity: 'error',
             summary: 'Rectifique los datos',
             detail: 'Clave o Usuario incorrecto, Intente de Nuevo',
           });
-
         }
         this.mostrar = !this.mostrar;
       });
   }
   getUserLogged() {
-    this.authService.getUserLogged().subscribe((res) => {
-    });
+    this.authService.getUserLogged().subscribe((res) => {});
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
   preguntasHome() {
