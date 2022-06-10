@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, HostListener, Input, OnInit, Inject } from '@angular/core';
+import { inject } from '@angular/core/testing';
 import { QuestionI } from 'src/app/models/question-i';
 import { QuestionService } from 'src/app/Service/question.service';
 import { ServiceService } from 'src/app/Service/service.service';
@@ -11,20 +13,38 @@ import { ServiceService } from 'src/app/Service/service.service';
 export class QuestionsComponent implements OnInit {
   userLogged = this.authService.getUserLogged();
   uid: any;
+  showButton = false
+  scrollHeight = 100
+  
+  @HostListener('window:scroll')
+  onWindowScroll():void{
+    const yOffSet = window.pageYOffset
+    const scrollTop = this.document.documentElement.scrollTop
+    this.showButton = (yOffSet || scrollTop) > this.scrollHeight
+  }
 
+  onScrollTop(): void{
+    this.document.documentElement.scrollTop = 0
+  }
+
+  onScrollDown():void{
+    console.log('mamarre')
+  }
+  
   totalQuestions: number = 0;
-
+  
   questions: QuestionI[] | undefined;
   user: any = '';
   page: number = 0;
   pages: Array<number> | undefined;
   disabled: boolean = false;
-
+  
   constructor(
+    @Inject(DOCUMENT) private document: Document,
     private service: QuestionService,
     public authService: ServiceService
   ) {}
-
+  
   ngOnInit(): void {
     this.getQuestions();
     this.traerdatos();
