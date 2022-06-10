@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { MessageService } from 'primeng/api';
+
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   AngularFirestore,
@@ -14,10 +16,13 @@ import { User } from '../models/user';
 })
 export class ServiceService {
   userData: any;
+  mostrar: Boolean = false;
   constructor(
     public afauth: AngularFireAuth,
     public store: AngularFirestore,
-    public router: Router
+    public router: Router,
+    public messageService: MessageService,
+
   ) {
     this.afauth.authState.subscribe((user) => {
       if (user) {
@@ -33,33 +38,44 @@ export class ServiceService {
 
   async login(email: string, password: string) {
     try {
-      return await this.afauth
-        .signInWithEmailAndPassword(email, password)      
-        
-    } catch (error) {
-      return null;
-    }
-  }
-  async loginRegistre(email: string, password: string) {
-    try {
-      return await this.afauth
-        .createUserWithEmailAndPassword(email, password)        
+      return await (await this.afauth.signInWithEmailAndPassword(email, password));
     } catch (error) {
       return null;
     }
   }
 
-  async resetPassword(email: string) {
+  async loginRegistre(email: string, password: string) {
     try {
-      return this.afauth.sendPasswordResetEmail(email);
+      const registro = await this.afauth
+      .createUserWithEmailAndPassword(email, password);
+
+      this.afauth.currentUser.then((user) => {
+          user?.sendEmailVerification();});
+
+      return registro
     } catch (error) {
       return null;
     }
   }
+
+
+  resetPassword(email: string) {
+    return this.afauth
+    .sendPasswordResetEmail(email)
+    .then(() => {
+      window.confirm('Se ha enviado un correo para restablecer la contraseña');
+    })
+    .catch(() => {
+      window.alert('Error al enviar el correo, intente de nuevo');
+    });
+  }
+
+
   async loginGoogle(email: string, password: string) {
     try {
-      return await this.afauth
-        .signInWithPopup(new firebase.auth.GoogleAuthProvider())       
+      return await this.afauth.signInWithPopup(
+        new firebase.auth.GoogleAuthProvider()
+      );
     } catch (error) {
       return null;
     }
@@ -69,6 +85,9 @@ export class ServiceService {
     return this.afauth.authState;
   }
 
+  logout() {
+    return this.afauth.signOut();
+  }
 
   SetUserData(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.store.doc(

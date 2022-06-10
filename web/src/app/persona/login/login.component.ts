@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     this.mostrar = !this.mostrar;
     this.authService
       .login(this.form.value.email, this.form.value.password)
-      .then((res) => {       
+      .then((res) => {
         if (res == undefined) {
           this.messageService.add({
             severity: 'error',
@@ -47,19 +47,22 @@ export class LoginComponent implements OnInit {
             detail: 'Clave o Usuario incorrecto, Intente de Nuevo',
           });
         } else {
+
           this.messageService.add({
             severity: 'success',
             summary: 'Bienvenido',
             detail: 'Disfruta de tu estadía',
           });
+
           this.route.navigate(['questions']);
         }
 
-        this.mostrar = !this.mostrar;
-      });
-  }
+
+          this.route.navigate(['preguntas']);}
+      this.mostrar = !this.mostrar;  });
+    }
   ingresarGoogle() {
-    this.mostrar = !this.mostrar;       
+    this.mostrar = !this.mostrar;
     this.authService
       .loginGoogle(this.form.value.email, this.form.value.password)
       .then((res) => {
@@ -72,25 +75,28 @@ export class LoginComponent implements OnInit {
           setTimeout(() => {
             this.route.navigate(['questions']);
           }, 3000);
-
         } else {
           this.messageService.add({
             severity: 'error',
             summary: 'Rectifique los datos',
             detail: 'Clave o Usuario incorrecto, Intente de Nuevo',
           });
-          
         }
         this.mostrar = !this.mostrar;
       });
   }
   getUserLogged() {
-    this.authService.getUserLogged().subscribe((res) => {     
-    });
+    this.authService.getUserLogged().subscribe((res) => {});
   }
- 
-  questionsHome() {
-    this.route.navigate(['questions']);
+
+
+  logout() {
+    this.authService.logout();
+  }
+
+  preguntasHome() {
+    this.route.navigate(['preguntas']);
+
   }
 
   //TODO: Utilidades

@@ -25,6 +25,8 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { RecoverPasswordComponent } from './persona/recover-password/recover-password.component';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -38,9 +40,9 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     AnswerComponent,
     QuestionComponent,
     RequestionComponent,
-    EditComponent
-
-  ],
+    EditComponent,
+    RecoverPasswordComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -60,7 +62,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 
   ],
-  providers: [HttpClientModule],
+  providers: [HttpClientModule,  MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
