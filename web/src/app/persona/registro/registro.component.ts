@@ -5,12 +5,12 @@ import { MessageService, Message } from 'primeng/api';
 import { ServiceService } from 'src/app/Service/service.service';
 
 @Component({
-  selector: 'app-registro',
+  selector: 'app-register',
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.scss'],
   providers: [MessageService],
 })
-export class RegistroComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   mostrar: Boolean = false;
   val1: number = 3;
 
@@ -41,7 +41,7 @@ export class RegistroComponent implements OnInit {
             detail: 'Usuario Almacenado correctamente',
           });
           setTimeout(() => {
-            this.route.navigate(['preguntas']);
+            this.route.navigate(['questions']);
           }, 2000);
         } else {
           this.messageService.add({
@@ -67,8 +67,8 @@ export class RegistroComponent implements OnInit {
     });
   }
   
-  preguntasHome() {
-    this.route.navigate(['preguntas']);
+  questionsHome() {
+    this.route.navigate(['questions']);
   }
 
   //TODO: Utilidades
