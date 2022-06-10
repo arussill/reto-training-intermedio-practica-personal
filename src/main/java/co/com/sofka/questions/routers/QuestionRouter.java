@@ -43,11 +43,11 @@ public class QuestionRouter {
 
     //  getOwnerAll
     @Bean
-    @RouterOperation(beanClass = OwnerListUseCase.class, beanMethod = "apply",
-            operation = @Operation(operationId = "getOwnerAll", summary = "Obtener todas las preguntas de un usuario por su ID", tags = {"Preguntas"},
-                    responses = {@ApiResponse(responseCode = "200", description = "successful operation"),
-                            @ApiResponse(responseCode = "400", description = "Invalid supplied"),
-                            @ApiResponse(responseCode = "404", description = "not found")}))
+    @RouterOperation(operation = @Operation(operationId = "getOwnerAll", summary = "Encontrar todas las preguntas de UserId", tags = {"Preguntas"},
+            parameters = {@Parameter(in = ParameterIn.PATH, name = "userId", description = "UserId")},
+            responses = {@ApiResponse(responseCode = "200", description = "successful operation"),
+                    @ApiResponse(responseCode = "400", description = "Invalid User ID supplied"),
+                    @ApiResponse(responseCode = "404", description = "operation not found")}))
     public RouterFunction<ServerResponse> getOwnerAll(OwnerListUseCase ownerListUseCase) {
         return route(
                 GET("/getOwnerAll/{userId}"),
