@@ -1,6 +1,5 @@
 package co.com.sofka.questions.usecases;
 
-import co.com.sofka.questions.collections.Answer;
 import co.com.sofka.questions.collections.Question;
 import co.com.sofka.questions.reposioties.AnswerRepository;
 import co.com.sofka.questions.reposioties.QuestionRepository;
@@ -9,8 +8,7 @@ import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class DeleteUseCaseTest {
 
@@ -41,10 +39,11 @@ class DeleteUseCaseTest {
 
         StepVerifier.create(deleteUseCase.apply(question.getId()))
                 .expectNextMatches(pregunta->{
-                    assert pregunta.equals(question.getId());
+                    assert pregunta.equals(question);
                     return true;
                 }).expectComplete();
 
+        verify(questionRepository).deleteById(question.getId());
     }
 
 
