@@ -13,13 +13,14 @@ export class QuestionService {
   }
 
 
-  private url: string = 'http://localhost:8080/';
+  private url: string = 'http://localhost:8080';
 
 
   constructor(private http: HttpClient) {}
 
   getPage(page: number): Observable<QuestionI[]> {
-    let direction = this.url + 'pagination/' + page;
+    let direction = this.url + "/getAll/" + page;
+    console.log(direction);
     return this.http.get<QuestionI[]>(direction);
   }
 
@@ -29,9 +30,10 @@ export class QuestionService {
   }
 
   getQuestion(id: string): Observable<QuestionI> {
-    let direction = this.url + 'get/' + id;
+    let direction = this.url + `/getOwnerAll${id}`;
     return this.http.get<QuestionI>(direction);
   }
+
 
   getTotalPages(): Observable<number> {
     let direction = this.url + 'totalPages';
@@ -58,5 +60,10 @@ export class QuestionService {
   editQuestion(question: QuestionI): Observable<any> {
     let direction = this.url + 'update';
     return this.http.post<any>(direction, question);
+  }
+
+  getAllQuestions(): Observable<QuestionI[]> {
+    let direction = "http://localhost:8080/getAll";
+    return this.http.get<QuestionI[]>(direction);
   }
 }
