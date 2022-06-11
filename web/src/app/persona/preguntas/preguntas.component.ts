@@ -40,15 +40,6 @@ export class QuestionsComponent implements OnInit {
           this.questions = data;
         }
       )
-    //   this.service.getPage(this.page).subscribe((data) => {
-    //     this.questions = data;
-    // });
-    // this.service
-    //   .getTotalPages()
-    //   .subscribe((data) => (this.pages = new Array(data)));
-    // this.service
-    //   .getCountQuestions()
-    //   .subscribe((data) => (this.totalQuestions = data));
   }
 
   isLast(): boolean {
