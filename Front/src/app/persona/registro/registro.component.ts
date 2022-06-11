@@ -5,7 +5,7 @@ import { MessageService, Message } from 'primeng/api';
 import { ServiceService } from 'src/app/Service/service.service';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-registro',
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.scss'],
   providers: [MessageService],
@@ -43,9 +43,12 @@ export class RegisterComponent implements OnInit {
             detail: 'Usuario Almacenado correctamente',
           });
 
-          setTimeout(() => {
-            this.route.navigate(['questions']);
-          }, 2000);
+          // setTimeout(() => {
+          //   if(res?.user?.emailVerified){
+          //   this.route.navigate(['preguntas']);
+          // }else{
+          //   this.route.navigate(['login']);
+          // }}, 2000);
 
         } else {
           this.messageService.add({

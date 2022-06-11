@@ -54,10 +54,6 @@ export class LoginComponent implements OnInit {
             detail: 'Disfruta de tu estadía',
           });
 
-          this.route.navigate(['questions']);
-        }
-
-
           this.route.navigate(['preguntas']);}
       this.mostrar = !this.mostrar;  });
     }
@@ -73,7 +69,7 @@ export class LoginComponent implements OnInit {
             detail: 'Disfruta de tu estadía',
           });
           setTimeout(() => {
-            this.route.navigate(['questions']);
+            this.route.navigate(['preguntas']);
           }, 3000);
         } else {
           this.messageService.add({
@@ -89,14 +85,12 @@ export class LoginComponent implements OnInit {
     this.authService.getUserLogged().subscribe((res) => {});
   }
 
-
   logout() {
     this.authService.logout();
   }
 
   preguntasHome() {
     this.route.navigate(['preguntas']);
-
   }
 
   //TODO: Utilidades
