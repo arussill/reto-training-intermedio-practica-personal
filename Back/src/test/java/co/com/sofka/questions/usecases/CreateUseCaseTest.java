@@ -3,9 +3,10 @@ package co.com.sofka.questions.usecases;
 import co.com.sofka.questions.collections.Question;
 import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.reposioties.QuestionRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
@@ -13,40 +14,51 @@ import static org.mockito.Mockito.*;
 
 class CreateUseCaseTest {
 
+    @Mock
     QuestionRepository questionRepository;
+
+    @Mock
     CreateUseCase createUseCase;
 
+    MapperUtils mapperUtils = new MapperUtils();
 
     @BeforeEach
-    public void setup() {
-        MapperUtils mapperUtils = new MapperUtils();
+    public void setUp() {
         questionRepository = mock(QuestionRepository.class);
         createUseCase = new CreateUseCase(mapperUtils, questionRepository);
+
     }
 
     @Test
-    void getValidationTest() {
+    void getValidationCreateTest() {
         var question = new Question();
-        question.setUserId("idUsuario");
-        question.setType("tech");
-        question.setCategory("software");
-        question.setQuestion("¿Que es java?");
+        question.setId("idPregunta");
+        question.setUserId("userId");
+        question.setQuestion("pregunta");
+        question.setType("educativa");
+        question.setCategory("tech");
 
         var questionDTO = new QuestionDTO();
-        questionDTO.setUserId("idUsuario");
-        questionDTO.setType("tech");
-        questionDTO.setCategory("software");
-        questionDTO.setQuestion("¿Que es java?");
+        questionDTO.setId(question.getId());
+        questionDTO.setUserId(question.getUserId());
+        questionDTO.setQuestion(question.getQuestion());
+        questionDTO.setType(question.getType());
+        questionDTO.setCategory(question.getCategory());
 
-        when(questionRepository.save(question)).thenReturn(Mono.just(question));
+        when(questionRepository.save(Mockito.any(Question.class))).thenReturn(Mono.just(question));
 
         StepVerifier.create(createUseCase.apply(questionDTO))
-                .(questionDTO->{
-                    Assertions.assertEquals(questionDTO.getUserId(), question.getUserId());
 
+                .expectNextMatches(q -> {
 
-                }).expectComplete();
+                    assert questionDTO.getId().equals(question.getId());
+                    assert questionDTO.getUserId().equals("userId");
+                    assert questionDTO.getCategory().equals("tech");
+                    assert questionDTO.getQuestion().equals("pregunta");
+                    assert questionDTO.getType().equals("educativa");
+                    return true;
+                }).verifyComplete();
 
-        verify(questionRepository).save(question);
+        verify(questionRepository).save(Mockito.any(Question.class));
     }
 }
