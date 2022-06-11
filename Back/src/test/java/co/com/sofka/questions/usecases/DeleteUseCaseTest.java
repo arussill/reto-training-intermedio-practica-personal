@@ -28,7 +28,7 @@ class DeleteUseCaseTest {
     @Test
     void getValidationTest() {
         var question = new Question();
-        question.setUserId("idPregunta");
+        question.setId("idPregunta");
         question.setUserId("usuarioPreguntaId");
         question.setType("tech");
         question.setCategory("software");
@@ -37,11 +37,11 @@ class DeleteUseCaseTest {
 
         Mono.just(question).flatMap(questionRepository::save).subscribe();
 
-        when(questionRepository.deleteById("idPregunta")).thenReturn(Mono.empty());
+        when(questionRepository.deleteById(question.getId())).thenReturn(Mono.empty());
 
-        StepVerifier.create(deleteUseCase.apply("idPregunta"))
+        StepVerifier.create(deleteUseCase.apply(question.getId()))
                 .expectNextMatches(pregunta->{
-                    assert pregunta.equals("idPregunta");
+                    assert pregunta.equals(question.getId());
                     return true;
                 }).expectComplete();
 
