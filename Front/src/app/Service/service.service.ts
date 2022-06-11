@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { MessageService } from 'primeng/api';
 
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -22,7 +22,7 @@ export class ServiceService {
     public store: AngularFirestore,
     public router: Router,
     public messageService: MessageService,
-
+    public ngZone: NgZone
   ) {
     this.afauth.authState.subscribe((user) => {
       if (user) {
@@ -38,7 +38,10 @@ export class ServiceService {
 
   async login(email: string, password: string) {
     try {
-      return await (await this.afauth.signInWithEmailAndPassword(email, password));
+      return await await this.afauth.signInWithEmailAndPassword(
+        email,
+        password
+      );
     } catch (error) {
       return null;
     }
@@ -46,39 +49,77 @@ export class ServiceService {
 
   async loginRegistre(email: string, password: string) {
     try {
-      const registro = await this.afauth
-      .createUserWithEmailAndPassword(email, password);
+      const registro = await this.afauth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
 
       this.afauth.currentUser.then((user) => {
-          user?.sendEmailVerification();});
+        user?.sendEmailVerification();
+      });
 
-      return registro
+      return registro;
     } catch (error) {
       return null;
     }
   }
-
 
   resetPassword(email: string) {
     return this.afauth
-    .sendPasswordResetEmail(email)
-    .then(() => {
-      window.confirm('Se ha enviado un correo para restablecer la contraseña');
-    })
-    .catch(() => {
-      window.alert('Error al enviar el correo, intente de nuevo');
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        window.confirm(
+          'Se ha enviado un correo para restablecer la contraseña'
+        );
+      })
+      .catch(() => {
+        window.alert('Error al enviar el correo, intente de nuevo');
+      });
+  }
+
+  // loginGoogle() {
+  //   return this.afauth
+  //     .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+  //     .then((res) => {
+  //       if (res) {
+  //         this.router.navigate(['preguntas']);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       return null;
+  //     });
+  // }
+
+  // async loginGoogle() {
+  //   try {
+  //     return await this.afauth.signInWithPopup(
+  //       new firebase.auth.GoogleAuthProvider()
+  //     );
+  //   } catch (error) {
+  //     return null;
+  //   }
+  // }
+
+  loginGoogle() {
+    return this.AuthLogin(new firebase.auth.GoogleAuthProvider()).then((res: any) => {
+      if (res) {
+        this.router.navigate(['preguntas']);
+      }
     });
   }
 
-
-  async loginGoogle(email: string, password: string) {
-    try {
-      return await this.afauth.signInWithPopup(
-        new firebase.auth.GoogleAuthProvider()
-      );
-    } catch (error) {
-      return null;
-    }
+  AuthLogin(provider: any) {
+    return this.afauth
+      .signInWithPopup(provider)
+      .then((result) => {
+        this.ngZone.run(() => {
+          this.router.navigate(['preguntas']);
+        });
+        this.SetUserData(result.user);
+      })
+      .catch((error) => {
+        window.alert(error);
+      });
   }
 
   getUserLogged() {
@@ -86,8 +127,12 @@ export class ServiceService {
   }
 
   logout() {
-    return this.afauth.signOut();
-  }
+    return this.afauth.signOut().then(() => {
+      console.log(localStorage.getItem('user'));
+      localStorage.removeItem('user');
+      console.log(localStorage.getItem('user'));
+      this.router.navigate(['login']);
+    });}
 
   SetUserData(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.store.doc(

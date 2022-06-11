@@ -27,10 +27,10 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(
-    private formBuilder: FormBuilder,
-    private messageService: MessageService,
-    private authService: ServiceService,
-    private route: Router
+    public formBuilder: FormBuilder,
+    public messageService: MessageService,
+    public authService: ServiceService,
+    public route: Router
   ) {}
 
   ngOnInit(): void {}
@@ -47,7 +47,6 @@ export class LoginComponent implements OnInit {
             detail: 'Clave o Usuario incorrecto, Intente de Nuevo',
           });
         } else {
-
           this.messageService.add({
             severity: 'success',
             summary: 'Bienvenido',
@@ -60,8 +59,8 @@ export class LoginComponent implements OnInit {
   ingresarGoogle() {
     this.mostrar = !this.mostrar;
     this.authService
-      .loginGoogle(this.form.value.email, this.form.value.password)
-      .then((res) => {
+      .loginGoogle()
+      .then((res:any) => {
         if (res) {
           this.messageService.add({
             severity: 'success',

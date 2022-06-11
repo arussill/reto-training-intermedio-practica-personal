@@ -35,21 +35,12 @@ export class RegisterComponent implements OnInit {
     this.authService
       .loginRegistre(this.form.value.email, this.form.value.password)
         .then((res) => {
-          // console.log("aqui toy:" + res?.user?.emailVerified);
         if (res) {
           this.messageService.add({
             severity: 'success',
             summary: '!Exitoso¡',
             detail: 'Usuario Almacenado correctamente',
-          });
-
-          // setTimeout(() => {
-          //   if(res?.user?.emailVerified){
-          //   this.route.navigate(['preguntas']);
-          // }else{
-          //   this.route.navigate(['login']);
-          // }}, 2000);
-
+          });this.route.navigate(['preguntas']);
         } else {
           this.messageService.add({
             severity: 'error',
@@ -57,15 +48,14 @@ export class RegisterComponent implements OnInit {
             detail: 'Por favor intente con otro correo',
           });
         }
-
         this.mostrar = !this.mostrar;
       });
   }
   ingresarGoogle() {
     this.mostrar = !this.mostrar;
     this.authService
-      .loginGoogle(this.form.value.email, this.form.value.password)
-      .then((res) => {
+      .loginGoogle()
+      .then(() => {
         this.mostrar = !this.mostrar;
       });
   }

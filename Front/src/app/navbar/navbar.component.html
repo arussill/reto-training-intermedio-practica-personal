@@ -5,8 +5,8 @@
         alt="" width="200" height="75">
     </a></div>
   <div class="p-2 bd-highlight" >
-    <button  type="button" label="Iniciar Sesion" class="btn btn btn-outline-primary" *ngIf="!authService.userData" (click)="login()"><p class="h5">Login</p></button>
-    <button  class="btn btn-outline-warning " *ngIf="authService.userData"><p class="h5">Logout</p></button>
+    <button  type="button" label="Iniciar Sesion" class="btn btn btn-outline-primary" *ngIf="!authService.userData || authService.userData === null " (click)="login()"><p class="h5">Login</p></button>
+    <button  class="btn btn-outline-warning " *ngIf="authService.userData || !authService.userData === null" (click)="logout()"><p class="h5">Logout</p></button>
   </div>
 
 </nav>
