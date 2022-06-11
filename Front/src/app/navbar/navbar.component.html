@@ -1,0 +1,12 @@
+<nav class="navbar d-flex bd-highlight">
+  <div class="p-2 flex-grow-1 bd-highlight"><a href="/preguntas">
+      <img
+        src="https://ik.imagekit.io/lvh0tltbeph/SofkaU/logo-sofkau_1Fn3uH-1S.png?ik-sdk-version=javascript-1.4.3&updatedAt=1645658493330"
+        alt="" width="200" height="75">
+    </a></div>
+  <div class="p-2 bd-highlight" >
+    <button  type="button" label="Iniciar Sesion" class="btn btn btn-outline-primary" *ngIf="!authService.userData" (click)="login()"><p class="h5">Login</p></button>
+    <button  class="btn btn-outline-warning " *ngIf="authService.userData"><p class="h5">Logout</p></button>
+  </div>
+
+</nav>
