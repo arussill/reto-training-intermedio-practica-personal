@@ -72,8 +72,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-
-  preguntasHome() {
+  questionsHome() {
     this.route.navigate(['preguntas']);
   }
 

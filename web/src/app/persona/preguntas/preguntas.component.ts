@@ -53,16 +53,13 @@ export class QuestionsComponent implements OnInit {
   getQuestions(): void {
     this.userLogged.subscribe(value =>{
         this.uid=value?.uid
-    });
-    this.service.getPage(this.page).subscribe((data) => {
-        this.questions = data;
-    });
-    this.service
-      .getTotalPages()
-      .subscribe((data) => (this.pages = new Array(data)));
-    this.service
-      .getCountQuestions()
-      .subscribe((data) => (this.totalQuestions = data));
+      });
+      this.service.getAllQuestions().subscribe(
+        (data) => {
+          console.log(data);
+          this.questions = data;
+        }
+      )
   }
 
   isLast(): boolean {
@@ -84,6 +81,7 @@ export class QuestionsComponent implements OnInit {
 
   getPage(page: number): void {
     this.page = page;
+    console.log(this.page);
     this.getQuestions();
   }
 

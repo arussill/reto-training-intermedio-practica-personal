@@ -11,8 +11,7 @@ export class NavbarComponent implements OnInit {
   userLogged = this.authService.getUserLogged();
   disabled: boolean = false;
 
-  constructor(private authService: ServiceService, private route: Router) {}
-
+  constructor(public authService: ServiceService, public route: Router) {}
   ngOnInit(): void {
     this.traerdatos();
   }
