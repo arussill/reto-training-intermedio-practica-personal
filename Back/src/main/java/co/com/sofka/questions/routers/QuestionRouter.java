@@ -126,4 +126,20 @@ public class QuestionRouter {
                         .body(BodyInserters.fromPublisher(deleteUseCase.apply(request.pathVariable("id")), Void.class))
         );
     }
+
+    // Put
+    @Bean
+    @RouterOperation(beanClass = UpdateUseCase.class, beanMethod = "apply",
+            operation = @Operation(operationId = "Actualizar", summary = "Actualizar pregunta",  tags = {"Preguntas"}))
+    public RouterFunction<ServerResponse> create(UpdateUseCase updarteCreateTest) {
+        Function<QuestionDTO, Mono<ServerResponse>> executor = questionDTO -> updarteCreateTest.apply(questionDTO)
+                .flatMap(result -> ServerResponse.ok()
+                        .contentType(MediaType.TEXT_PLAIN)
+                        .bodyValue(result));
+
+        return route(
+                PUT("/update/{id}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> request.bodyToMono(QuestionDTO.class).flatMap(executor)
+        );
+    }
 }
