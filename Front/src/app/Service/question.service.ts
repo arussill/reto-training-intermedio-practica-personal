@@ -13,7 +13,7 @@ export class QuestionService {
   }
 
 
-  private url: string = 'http://localhost:8080';
+  private url: string = 'https://reto-preguntas-respuestas.herokuapp.com';
 
 
   constructor(private http: HttpClient) {}
@@ -24,14 +24,14 @@ export class QuestionService {
     return this.http.get<QuestionI[]>(direction);
   }
 
-  getAnswer(id: any): Observable<QuestionI> {
-    let direction = this.url + 'get/' + id;
+  getQuestion(id: any): Observable<QuestionI> {
+    let direction = this.url + '/get/' + id;
     return this.http.get<QuestionI>(direction);
   }
 
-  getQuestion(id: string): Observable<QuestionI> {
-    let direction = this.url + `/getOwnerAll${id}`;
-    return this.http.get<QuestionI>(direction);
+  getAnswers(id: string): Observable<AnswerI[]> {
+    let direction = this.url + `/getOwnerAll/${id}`;
+    return this.http.get<AnswerI[]>(direction);
   }
 
 
@@ -46,14 +46,15 @@ export class QuestionService {
   }
 
   saveQuestion(question: QuestionI): Observable<any> {
-    let direction = this.url + 'create';
+    let direction = this.url + '/create';
     return this.http.post<any>(direction, question, {
       responseType: 'text' as 'json',
     });
   }
 
   saveAnswer(answer: AnswerI): Observable<any> {
-    let direction = this.url + 'add';
+    let direction = this.url + '/add';
+    console.log(answer)
     return this.http.post<any>(direction, answer);
   }
 
@@ -63,7 +64,7 @@ export class QuestionService {
   }
 
   getAllQuestions(): Observable<QuestionI[]> {
-    let direction = "http://localhost:8080/getAll";
+    let direction = "https://reto-preguntas-respuestas.herokuapp.com/getAll";
     return this.http.get<QuestionI[]>(direction);
   }
 }
