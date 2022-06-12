@@ -27,6 +27,7 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { RecoverPasswordComponent } from './persona/recover-password/recover-password.component';
 import { MessageService } from 'primeng/api';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 
@@ -49,6 +50,7 @@ import { MessageService } from 'primeng/api';
     PrimeNGModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    InfiniteScrollModule,
     AngularFireModule.initializeApp(environment.firebase),
     HttpClientModule,
     NgbModule,

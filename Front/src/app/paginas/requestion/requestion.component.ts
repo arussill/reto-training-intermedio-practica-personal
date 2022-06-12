@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AnswerI } from 'src/app/models/answer-i';
 import { QuestionI } from 'src/app/models/question-i';
@@ -20,14 +21,14 @@ export class RequestionComponent implements OnInit {
  
   page: number = 0;
 
-  constructor(
+  showButton = false
+  scrollHeight = 300
+
+  constructor(@Inject(DOCUMENT) private document: Document,
     private route:ActivatedRoute,
     private questionService:QuestionService,
-    private service: QuestionService,
-
-    ) {
-
-    }
+    private service: QuestionService, 
+    ) {}
 
   id:string | undefined;
 
@@ -63,6 +64,17 @@ export class RequestionComponent implements OnInit {
 
   onScroll() {
 
+  }
+
+  @HostListener('window:scroll')
+  onWindowScroll() : void{
+    const yOffSet = window.pageYOffset
+    const scrollTop = this.document.documentElement.scrollTop
+    this.showButton = (yOffSet || scrollTop) > this.scrollHeight
+  }
+
+  onScrollTop() : void{
+    this.document.documentElement.scrollTop = 0
   }
 
 }
