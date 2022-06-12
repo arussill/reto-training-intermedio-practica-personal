@@ -31,7 +31,7 @@ class AddAnswerUseCaseTest {
     }
 
     @Test
-    public void addAnswerTest() {
+    public void getValidationTest() {
         MapperUtils mapper = new MapperUtils();
         var answer = new Answer();
         answer.setId("answerId");

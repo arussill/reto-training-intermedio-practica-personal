@@ -5,7 +5,6 @@ import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.reposioties.QuestionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
@@ -14,16 +13,13 @@ import static org.mockito.Mockito.*;
 
 class CreateUseCaseTest {
 
-    @Mock
+
     QuestionRepository questionRepository;
-
-    @Mock
     CreateUseCase createUseCase;
-
-    MapperUtils mapperUtils = new MapperUtils();
 
     @BeforeEach
     public void setUp() {
+        MapperUtils mapperUtils = new MapperUtils();
         questionRepository = mock(QuestionRepository.class);
         createUseCase = new CreateUseCase(mapperUtils, questionRepository);
 
