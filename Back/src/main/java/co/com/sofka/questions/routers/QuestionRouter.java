@@ -50,12 +50,12 @@ public class QuestionRouter {
                     @ApiResponse(responseCode = "404", description = "operation not found")}))
     public RouterFunction<ServerResponse> getOwnerAll(OwnerListUseCase ownerListUseCase) {
         return route(
-                GET("/getOwnerAll/{userId}"),
+                GET("/getOwnerAll/{questionId}"),
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(
-                                ownerListUseCase.apply(request.pathVariable("userId")),
-                                QuestionDTO.class
+                                ownerListUseCase.apply(request.pathVariable("questionId")),
+                                AnswerDTO.class
                         ))
         );
     }

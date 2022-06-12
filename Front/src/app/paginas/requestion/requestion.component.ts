@@ -12,7 +12,7 @@ import { QuestionService } from 'src/app/Service/question.service';
 export class RequestionComponent implements OnInit {
   
   question:QuestionI | undefined;
-  answers: AnswerI[] | undefined;
+  answers: AnswerI[] = []
   answersNew: AnswerI[]=[];
   currentAnswer:number=0;
 
@@ -33,7 +33,7 @@ export class RequestionComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.getQuestions(`${id}`);
+    this.getAnswers(id as string);
     this.get2();
     
   }
@@ -42,15 +42,14 @@ export class RequestionComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     
 
-    this.service.getAnswer(id).subscribe((data) => {  
-          this.answers = data.answers;
+    this.service.getQuestion(id).subscribe((data) => {  
+          this.question = data;
     });
   }
 
-  getQuestions(id:string):void{
-    this.questionService.getQuestion(id).subscribe(data=>{
-      this.question=data;
-      this.answers = data.answers;
+  getAnswers(id:string):void{
+    this.questionService.getAnswers(id).subscribe((data : AnswerI[])=>{
+      this.answers = data;
     })
 
   }
