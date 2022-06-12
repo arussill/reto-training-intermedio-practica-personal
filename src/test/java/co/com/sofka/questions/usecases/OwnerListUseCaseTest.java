@@ -29,35 +29,35 @@ class OwnerListUseCaseTest {
         ownerListUseCase = new OwnerListUseCase(mapperUtils, answerRepository);
     }
 
-    /*@Test
-    void getValidationTest() {
-
-        var question = new Question();
-        question.setId("idPregunta");
-        question.setUserId("userId");
-        question.setType("tech");
-        question.setCategory("software");
-        question.setQuestion("que es java?");
-
-        var questionDTO = new QuestionDTO(question.getId(),question.getUserId(),question.getQuestion(),question.getType(),question.getCategory());
-
-
-
-        when(questionRepository.save(Mockito.any(Question.class))).thenReturn(Mono.just(question));
-
-        when(questionRepository.findByUserId(questionDTO.getUserId())).thenReturn(Flux.just(question));
-
-        StepVerifier.create(ownerListUseCase.apply(question.getUserId()).collectList())
-                .expectNextMatches(preguntas -> {
-                    assert preguntas.get(0).getId().equals(question.getId());
-                    assert preguntas.get(0).getUserId().equals(question.getUserId());
-                    assert preguntas.get(0).getType().equals(question.getType());
-                    assert preguntas.get(0).getCategory().equals(question.getCategory());
-                    assert preguntas.get(0).getQuestion().equals(question.getQuestion());
-                    return true;
-                }).verifyComplete();
-
-        verify(questionRepository).findByUserId(question.getUserId());
-
-    }*/
+//    /*@Test
+//    void getValidationTest() {
+//
+//        var question = new Question();
+//        question.setId("idPregunta");
+//        question.setUserId("userId");
+//        question.setType("tech");
+//        question.setCategory("software");
+//        question.setQuestion("que es java?");
+//
+//        var questionDTO = new QuestionDTO(question.getId(),question.getUserId(),question.getQuestion(),question.getType(),question.getCategory());
+//
+//
+//
+//        when(questionRepository.save(Mockito.any(Question.class))).thenReturn(Mono.just(question));
+//
+//        when(questionRepository.findByUserId(questionDTO.getUserId())).thenReturn(Flux.just(question));
+//
+//        StepVerifier.create(ownerListUseCase.apply(question.getUserId()).collectList())
+//                .expectNextMatches(preguntas -> {
+//                    assert preguntas.get(0).getId().equals(question.getId());
+//                    assert preguntas.get(0).getUserId().equals(question.getUserId());
+//                    assert preguntas.get(0).getType().equals(question.getType());
+//                    assert preguntas.get(0).getCategory().equals(question.getCategory());
+//                    assert preguntas.get(0).getQuestion().equals(question.getQuestion());
+//                    return true;
+//                }).verifyComplete();
+//
+//        verify(questionRepository).findByUserId(question.getUserId());
+//
+//    }*/
 }

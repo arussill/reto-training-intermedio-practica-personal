@@ -41,12 +41,12 @@ public class QuestionRouter {
         );
     }
 
-    //  getOwnerAll
+    //obtener respuestas
     @Bean
-    @RouterOperation(operation = @Operation(operationId = "getOwnerAll", summary = "Encontrar todas las preguntas de UserId", tags = {"Preguntas"},
-            parameters = {@Parameter(in = ParameterIn.PATH, name = "userId", description = "UserId")},
+    @RouterOperation(operation = @Operation(operationId = "/getOwnerAll/{questionId}", summary = "Retorna respuesta d epreguntas", tags = {"Respuestas"},
+            parameters = {@Parameter(in = ParameterIn.PATH, name = "questionId", description = "questionId")},
             responses = {@ApiResponse(responseCode = "200", description = "successful operation"),
-                    @ApiResponse(responseCode = "400", description = "Invalid User ID supplied"),
+                    @ApiResponse(responseCode = "400", description = "Invalid question ID supplied"),
                     @ApiResponse(responseCode = "404", description = "operation not found")}))
     public RouterFunction<ServerResponse> getOwnerAll(OwnerListUseCase ownerListUseCase) {
         return route(
@@ -130,7 +130,8 @@ public class QuestionRouter {
     // Put
     @Bean
     @RouterOperation(beanClass = UpdateUseCase.class, beanMethod = "apply",
-            operation = @Operation(operationId = "Actualizar", summary = "Actualizar pregunta",  tags = {"Preguntas"}))
+            operation = @Operation(operationId = "Actualizar", summary = "Actualizar pregunta",  tags = {"Preguntas"},
+                    parameters = {@Parameter(in = ParameterIn.PATH, name = "id", description = "id")}))
     public RouterFunction<ServerResponse> update(UpdateUseCase updateUseCase) {
         Function<QuestionDTO, Mono<ServerResponse>> executor = questionDTO -> updateUseCase.apply(questionDTO)
                 .flatMap(result -> ServerResponse.ok()
