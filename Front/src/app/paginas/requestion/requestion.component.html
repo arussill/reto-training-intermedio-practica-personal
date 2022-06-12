@@ -36,9 +36,7 @@
             <h2 class="accordion-header" id="headingOne">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 <h5 class="text-center">Respuesta: </h5>
-                <p-rating [cancel]="false" [(ngModel)]="questions.position" [disabled]="true"></p-rating>
-     
-                
+                <p-rating [cancel]="false" [(ngModel)]="questions.position" [disabled]="true"></p-rating> 
                 <!-- Respuesta -->
               </button>
             </h2>
@@ -46,11 +44,11 @@
               <p>{{ questions.answer }}</p>           
               <div class="accordion-body">
                 <strong></strong> 
-              
               </div>
             </div>
           </div>
         </div>
+        <button *ngIf="showButton" (click)="onScrollTop()" class="button">⬆️</button>
       </div>
       
     </div>

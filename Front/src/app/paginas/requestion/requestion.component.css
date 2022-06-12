@@ -5,3 +5,27 @@
     width: 100vw;
     height: 60vh;
 } */
+.button{
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 3;
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 2rem;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    background-color: #00a6ed;
+    border: 5px solid #227FDC;
+    transition: all 0.7s ease-out;
+  }
+  .button:hover{
+    font-size: 3rem;
+    width: 75px;
+    height: 75px;
+    border-radius: 45px;
+  }

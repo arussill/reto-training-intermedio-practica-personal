@@ -61,23 +61,21 @@
     <div class="formGroup">
       <button
         type="button"
-        class="btn btn-danger btn-lg"
+        class="btn btn-danger btn-lg mb-4"
         (click)="authService.loginGoogle()"
       >
         Continuar con Google
       </button>
     </div>
+    <button
+      type="button"
+      (click)="questionsHome()"
+      pButton
+      pRipple
+      label="Preguntas"
+      class="p-button-danger"
+    >
+      <i class="pi pi-user-edit" style="margin-right: 5px"></i>
+    </button>
   </div>
-</div>
-<div class="container2">
-  <button
-    type="button"
-    (click)="questionsHome()"
-    pButton
-    pRipple
-    label="Preguntas"
-    class="p-button-danger mb-2"
-  >
-    <i class="pi pi-user-edit" style="margin-right: 5px"></i>
-  </button>
 </div>
