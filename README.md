@@ -6,7 +6,7 @@ Reto final de Aplicación empresarial
 
 Al realizar el deploy en Heroku nos arroja el siguiente link de enlace:
 
--https://reto-preguntas-respuestas.herokuapp.com/
+-https://reto-pregunta-respuesta-sofkau.herokuapp.com/webjars/swagger-ui/index.html#/
 
 ## Deploy Firebase
 
