@@ -17,7 +17,6 @@
           <input id="float-input" type="text" formControlName="email" placeholder="Correo" pInputText>
         </span>
 
-
         <span class="p-float-label" style="margin: 20px;margin-top: 30px;">
 
           <input id="float-input" type="password" formControlName="password" placeholder="Contraseña" pInputText>
@@ -36,27 +35,14 @@
 
         <br>
         <p>Aun no tienes cuenta? <a routerLink="/registro">Registrate</a></p>
-
-
         <p>Olvido contraseña? <a routerLink="/recuperar-contraseña">Recuperar contraseña</a></p>
-
-
       </form>
-
     </div>
-
-    <div>
-
-    </div>
+    <button type="button" (click)="preguntasHome()" pButton pRipple label="Preguntas" class="p-button-danger">
+      <i class="pi pi-user-edit" style="margin-top: 5px;"></i>
+    </button>
   </div>
-
-
 </div>
-<div class="container2">
-  <button type="button" (click)="preguntasHome()" pButton pRipple label="Preguntas" class="p-button-danger mb-2"><i
-      class="pi pi-user-edit" style="margin-top: 5px;"></i></button>
-</div>
-
 
 
 <p-dialog header="Recuperar Contraseña" [(visible)]="displayModal" [modal]="true" [style]="{width: '20vw'}"

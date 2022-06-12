@@ -13,7 +13,7 @@ export class QuestionService {
   }
 
 
-  private url: string = 'https://reto-preguntas-respuestas.herokuapp.com';
+  private url: string = 'https://reto-pregunta-respuesta-sofkau.herokuapp.com';
 
 
   constructor(private http: HttpClient) {}
@@ -64,7 +64,7 @@ export class QuestionService {
   }
 
   getAllQuestions(): Observable<QuestionI[]> {
-    let direction = "https://reto-preguntas-respuestas.herokuapp.com/getAll";
+    let direction = "https://reto-pregunta-respuesta-sofkau.herokuapp.com/getAll";
     return this.http.get<QuestionI[]>(direction);
   }
 }
