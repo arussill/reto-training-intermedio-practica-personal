@@ -131,8 +131,8 @@ public class QuestionRouter {
     @Bean
     @RouterOperation(beanClass = UpdateUseCase.class, beanMethod = "apply",
             operation = @Operation(operationId = "Actualizar", summary = "Actualizar pregunta",  tags = {"Preguntas"}))
-    public RouterFunction<ServerResponse> create(UpdateUseCase updarteCreateTest) {
-        Function<QuestionDTO, Mono<ServerResponse>> executor = questionDTO -> updarteCreateTest.apply(questionDTO)
+    public RouterFunction<ServerResponse> update(UpdateUseCase updateUseCase) {
+        Function<QuestionDTO, Mono<ServerResponse>> executor = questionDTO -> updateUseCase.apply(questionDTO)
                 .flatMap(result -> ServerResponse.ok()
                         .contentType(MediaType.TEXT_PLAIN)
                         .bodyValue(result));
