@@ -12,8 +12,8 @@ export class QuestionService {
     throw new Error('Method not implemented.');
   }
 
-
-  private url: string = 'http://localhost:8080';
+  
+  private url: string = 'https://reto-preguntas-respuestas.herokuapp.com';
 
 
   constructor(private http: HttpClient) {}
@@ -63,7 +63,7 @@ export class QuestionService {
   }
 
   getAllQuestions(): Observable<QuestionI[]> {
-    let direction = "http://localhost:8080/getAll";
+    let direction = "https://reto-preguntas-respuestas.herokuapp.com/getAll";
     return this.http.get<QuestionI[]>(direction);
   }
 }
