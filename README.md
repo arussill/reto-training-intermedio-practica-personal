@@ -19,6 +19,7 @@ Juan Manuel Mesa Posada
 - Uso adecuado de Observable en Angular
 - Uso de algún frameworks o preprocesador CSS
 - Uso de Swagger 
+- Test casos de uso Back-End
 
 
 
