@@ -41,21 +41,21 @@ public class QuestionRouter {
         );
     }
 
-    //  getOwnerAll
+    //obtener respuestas
     @Bean
-    @RouterOperation(operation = @Operation(operationId = "getOwnerAll", summary = "Encontrar todas las preguntas de UserId", tags = {"Preguntas"},
-            parameters = {@Parameter(in = ParameterIn.PATH, name = "userId", description = "UserId")},
+    @RouterOperation(operation = @Operation(operationId = "/getOwnerAll/{questionId}", summary = "Retorna respuesta d epreguntas", tags = {"Respuestas"},
+            parameters = {@Parameter(in = ParameterIn.PATH, name = "questionId", description = "questionId")},
             responses = {@ApiResponse(responseCode = "200", description = "successful operation"),
-                    @ApiResponse(responseCode = "400", description = "Invalid User ID supplied"),
+                    @ApiResponse(responseCode = "400", description = "Invalid question ID supplied"),
                     @ApiResponse(responseCode = "404", description = "operation not found")}))
     public RouterFunction<ServerResponse> getOwnerAll(OwnerListUseCase ownerListUseCase) {
         return route(
-                GET("/getOwnerAll/{userId}"),
+                GET("/getOwnerAll/{questionId}"),
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(
-                                ownerListUseCase.apply(request.pathVariable("userId")),
-                                QuestionDTO.class
+                                ownerListUseCase.apply(request.pathVariable("questionId")),
+                                AnswerDTO.class
                         ))
         );
     }
